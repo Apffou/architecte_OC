@@ -194,7 +194,7 @@ footer nav ul {
 	gap: 10px;
 }
 
-.default_style_filter{
+.tag{
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -205,5 +205,10 @@ footer nav ul {
 	height: 37px;
 	border: 1.5px solid  #1D6154;
 	border-radius: 60px;
+	cursor: pointer;
+}
 
+.tag_selected{
+	background-color: #1D6154;
+	color: white;
 }

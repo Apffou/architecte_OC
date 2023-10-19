@@ -1,13 +1,10 @@
 // Appel de la ressource 
 const worksRespons = await fetch("http://localhost:5678/api/works");
 const projects = await worksRespons.json();
-console.log(projects)
 
 
-const parentProject = document.querySelector(".gallery");
+const galleryDOM = document.querySelector(".gallery");
 
-// suppression du html 
-parentProject.innerHTML = "";
 
 // Boucle sur tableau pour creer les elements Projets du site
 projects.forEach(element => {
@@ -22,21 +19,25 @@ projects.forEach(element => {
 
     projectParent.appendChild(projectImage);
     projectParent.appendChild(projectLegend);
-    parentProject.appendChild(projectParent);
+    galleryDOM.appendChild(projectParent);
     
 });
 
 // Filtre : utilisation de la propriete category : id.
 // objets html : id 1 / appartements = id2 / hotels & res = id 3 / toutes les categories = Users ID
 
-const nameFilters = ["Test", "Objets", "Appartements", "Hotêl & restaurants"];
+const categoryRespons =  await fetch("http://localhost:5678/api/categories");
+const tagsCategory = await categoryRespons.json();
+console.log(tagsCategory)
 
-nameFilters.forEach(element => {
-    const parentFilters = document.querySelector(".filters");
+
+const parentFilters = document.querySelector(".filters");
+
+tagsCategory.forEach(element => {
+
     const elementFilter = document.createElement("span");
-    elementFilter.classList.add("default_style_filter");
-    elementFilter.innerText= element;
-    
+    elementFilter.classList.add("tag");
+    elementFilter.innerText= element.name;
     parentFilters.appendChild(elementFilter)
 })
 
