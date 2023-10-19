@@ -6,12 +6,13 @@ console.log(projects)
 
 const parentProject = document.querySelector(".gallery");
 
-
+// suppression du html 
 parentProject.innerHTML = "";
 
+// Boucle sur tableau pour creer les elements Projets du site
 projects.forEach(element => {
 
-    const toto = document.createElement("figure")
+    const projectParent = document.createElement("figure")
     const projectImage = document.createElement("img");
     const projectLegend = document.createElement("figcaption");
 
@@ -19,8 +20,23 @@ projects.forEach(element => {
     projectImage.alt = element.title;
     projectLegend.innerText = element.title;
 
-    toto.appendChild(projectImage)
-    toto.appendChild(projectLegend)
-    parentProject.appendChild(toto)
+    projectParent.appendChild(projectImage);
+    projectParent.appendChild(projectLegend);
+    parentProject.appendChild(projectParent);
     
 });
+
+// Filtre : utilisation de la propriete category : id.
+// objets html : id 1 / appartements = id2 / hotels & res = id 3 / toutes les categories = Users ID
+
+const nameFilters = ["Test", "Objets", "Appartements", "Hotêl & restaurants"];
+
+nameFilters.forEach(element => {
+    const parentFilters = document.querySelector(".filters");
+    const elementFilter = document.createElement("span");
+    elementFilter.classList.add("default_style_filter");
+    elementFilter.innerText= element;
+    
+    parentFilters.appendChild(elementFilter)
+})
+
