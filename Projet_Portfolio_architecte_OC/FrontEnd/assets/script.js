@@ -32,12 +32,16 @@ console.log(tagsCategory)
 
 
 const parentFilters = document.querySelector(".filters");
+const elementAllFilter = document.createElement("span");
+elementAllFilter.classList.add("tag")
+elementAllFilter.innerText = "Tous";
+parentFilters.appendChild(elementAllFilter);
+
 
 tagsCategory.forEach(element => {
-
     const elementFilter = document.createElement("span");
     elementFilter.classList.add("tag");
     elementFilter.innerText= element.name;
-    parentFilters.appendChild(elementFilter)
+    elementFilter.setAttribute("id_filters", element.id)
+    parentFilters.appendChild(elementFilter);
 })
-
