@@ -9,6 +9,7 @@ function test() {
         };
         // création de la chargeUtile en format JSON
         const chargUtile = JSON.stringify(interfaceLogin);
+        // Appel de la fonction fetch avec toutes les informations nécessaires
         fetch("http://localhost:5678/api/users/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -22,7 +23,7 @@ function test() {
 
 
 
-// Appel de la fonction fetch avec toutes les informations nécessaires
+
 
 
 // Fonction POST pour
