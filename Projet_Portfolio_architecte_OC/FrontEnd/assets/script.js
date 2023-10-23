@@ -63,19 +63,22 @@ elementFilterALL.forEach(elementfilter => {
         figureDomALL.forEach(element => {
             element.style.display = "none";
         })
-
+//condition pour afficher les elements correspondant à l'ID
         if (filtreID){
             const filterID1 = document.querySelectorAll(`figure[id_filters='${filtreID}']`);
 
             filterID1.forEach(elementID1 => {
                 elementID1.style.display = "block";
+            
             })
+            // Sinon affiche tous les elements par defaut
         }else {
             figureDomALL.forEach(element => {
                 element.style.display = "block";
             })
         }
 
-
     });
 })
+
+
