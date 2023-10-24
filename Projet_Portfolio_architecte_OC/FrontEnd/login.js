@@ -2,31 +2,47 @@
 function test() {
     const connectingForm = document.querySelector(".connecting_form");
 
-    connectingForm.addEventListener("submit", function (event) {
+    connectingForm.addEventListener("submit", async function (event) {
+        // Désactivation du comportement par défaut du navigateur
+        event.preventDefault();
+
         const interfaceLogin = {
-            email: event.target.querySelector(`"name="email"`).value,
-            motDePasse: event.target.querySelector("[name=password]").value,
+            email: event.target.querySelector("[name=email]").value,
+            password: event.target.querySelector("[name=password]").value,
         };
         // création de la chargeUtile en format JSON
         const chargUtile = JSON.stringify(interfaceLogin);
-        // Appel de la fonction fetch avec toutes les informations nécessaires
-        fetch("http://localhost:5678/api/users/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: chargUtile
-        });
-    })
 
+        // Appel de la fonction fetch avec toutes les informations nécessaires
+        const userIdentifiants = await fetch("http://localhost:5678/api/users/login", {
+            method: "POST",
+            body: chargUtile,
+            headers: { "Content-Type": "application/json" }
+
+        });
+
+        const  loginRespons = await userIdentifiants.json();
+
+        //const token = "eiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4";
+        //const emailValid = "email: sophie.bluel@test.tld";
+        //const passwordValid = "S0phie";
+        if (interfaceLogin.email !== loginRespons.userId && interfaceLogin.motDePasse !== loginRespons.token){
+            console.log("ça marche paaaas")
+            const errorMessage = document.querySelector(".login_error");
+            errorMessage.innerText = '"Erreur dans l’identifiant ou le mot de passe"';
+        }
+        else {
+            
+        }
+    })
 }
 
+test();
 
 
 
 
 
-
-
-// Fonction POST pour
 // Cours. Pour la partie pour envoyer du texte, image revoir Types MIME
 
 

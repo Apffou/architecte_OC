@@ -340,6 +340,14 @@ input[type="submit"] {
 	border-radius: 60px;
 }
 
+.login_error{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: rgb(203, 18, 18);
+	font-size: 1.5em;
+}
+
+
 /**************** SECTION FOOTER CSS */
 
 
