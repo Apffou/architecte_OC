@@ -387,4 +387,14 @@ footer nav ul {
 .tag_selected {
 	background-color: #1D6154;
 	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Syne', sans-serif;
+	font-size: 16px;
+	padding: 0 15px;
+	height: 37px;
+	border: 1.5px solid #1D6154;
+	border-radius: 60px;
+	cursor: pointer;
 }
