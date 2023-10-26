@@ -1,0 +1,68 @@
+@font-face {
+    font-family: 'Font awesome solid';
+    src: url(./assets/fontawesome/fa-solid-900.ttf);
+}
+
+/* Edition mode actif */
+.edition {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 2em;
+    background-color: black;
+    color: white;
+    font: inherit;
+    text-align: center;
+}
+
+.modale a {
+    text-decoration: none;
+    color: black;
+}
+h2 .modale {
+    color: black;
+    font-size: 14px;
+    font-family: 'Work sans';
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.js-modal::before {
+    font-family: 'Font awesome solid';
+    content: '\f044';
+    padding-right: 5px;
+
+}
+
+.visible {
+    font-family: 'Work sans';
+}
+
+/* Style modal  */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-wrapper{
+    width: 50%;
+    background-color: #FFF;
+    padding: 30px;
+}
+
+.modal-wrapper h1::before{
+    display: flex;
+    justify-content: flex-end;
+    font-family: 'Font awesome solid';
+    content: '\f00d';
+    color: black;
+}

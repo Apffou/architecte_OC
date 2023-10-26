@@ -57,12 +57,15 @@ const elementFilterALL = document.querySelectorAll(".filters span");
 elementFilterALL.forEach(elementfilter => {
     elementfilter.addEventListener("click", function (event) {
         let filtreID = event.target.getAttribute("data-id");
+        //dataset.id
 
         // 
-        const toti = document.querySelectorAll(".tag.tag_selected");
-        toti.forEach(element => {
-            element.classList.remove("tag_selected");
-        })
+        //const toti = document.querySelectorAll(".tag.tag_selected");
+        //toti.forEach(element => {
+       //     element.classList.remove("tag_selected");
+       // })
+
+        document.querySelector(".tag_selected").classList.remove("tag_selected");
 
         event.target.classList.add("tag_selected");
         const figureDomALL = document.querySelectorAll(".gallery figure");
@@ -71,14 +74,14 @@ elementFilterALL.forEach(elementfilter => {
             element.style.display = "none";
         })
         //condition pour afficher les elements correspondant à l'ID
-        if (filtreID){
+        if (filtreID) {
             const filterID1 = document.querySelectorAll(`figure[id_filters='${filtreID}']`);
             filterID1.forEach(elementID1 => {
                 elementID1.style.display = "block";
 
             })
             // Sinon affiche tous les elements par defaut
-        }else {
+        } else {
             figureDomALL.forEach(element => {
                 element.style.display = "block";
 
