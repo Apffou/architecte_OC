@@ -54,15 +54,24 @@ h2 .modale {
 }
 
 .modal-wrapper{
+    position: relative;
     width: 50%;
     background-color: #FFF;
     padding: 30px;
 }
 
-.modal-wrapper h1::before{
-    display: flex;
-    justify-content: flex-end;
-    font-family: 'Font awesome solid';
-    content: '\f00d';
+.js-modal-close a {
+    text-decoration: none;
     color: black;
+}
+
+.js-modal-close{
+    position: absolute;
+    display: block;
+    top: 20px;
+    right: 20px;
+    width: 10%;
+    background-color: red;
+    border: 0;
+
 }
