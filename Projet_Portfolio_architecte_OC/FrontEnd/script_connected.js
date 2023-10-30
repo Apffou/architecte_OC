@@ -64,15 +64,23 @@ if (token) {
 }
 
 
-// Suppression d'un projet
+    // Suppression d'un projet
+
+    const deleteWork = await fetch("http://localhost:5678/api/users/works", {
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${token}`},
+
+    });
+    console.log(deleteWork)
 
     const garbageDom = document.querySelectorAll(".trash-ico");
     garbageDom.forEach(element => {
         element.addEventListener('click', function(){
+            console.log("ihfzoeihfoeih")
+            });
+    });
 
-            console.log("STUPEFLIP")
-        });
-    })
 
 
-// Cours. Pour la partie pour envoyer du texte, image revoir Types MIME
+
+//  INFO DEUXIEME PARTICours. Pour la partie pour envoyer du texte, image revoir Types MIME
