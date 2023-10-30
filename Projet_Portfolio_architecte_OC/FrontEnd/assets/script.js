@@ -17,11 +17,9 @@ projects.forEach(element => {
     projectImage.alt = element.title;
     projectLegend.innerText = element.title;
 
-
     figureDOM.appendChild(projectImage);
     figureDOM.appendChild(projectLegend);
     galleryDOM.appendChild(figureDOM);
-
 });
 
 

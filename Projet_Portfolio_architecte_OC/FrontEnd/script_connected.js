@@ -5,7 +5,6 @@ let modal = null;
 // Fonction qui permet d'afficher la boite modale
 const openModal = function (e) {
     e.preventDefault();
-    console.log("open")
     // On recupère la modale
     const modal = document.querySelector(e.target.getAttribute('href'));
     modal.style.visibility = "visible";
@@ -42,26 +41,32 @@ if (token) {
     let modalTitle = document.querySelector(".modal-wrapper h1")
     modalTitle.innerText = "Galerie photo";
 
-
-
     // Appel de la ressource 
-    /*
+    
     const worksRespons = await fetch("http://localhost:5678/api/works");
     const projects = await worksRespons.json();
-    const galleryDOM = document.querySelector(".js-container-gallery");
+    const editionDOM = document.querySelector(".js-container-gallery");
 
     projects.forEach(element => {
+        console.log("MORDUUUUUU")
+        // Création des éléments HTML
         const divDOM = document.createElement("div");
+        const binDOM = document.createElement("i");
         const imageDOM = document.createElement("img");
-        const binDOM = document.createElement("img");
+        // Ajout des class sur ces éléments
+        divDOM.classList.add("js-content");
+        binDOM.classList.add("fa-solid");
+        binDOM.classList.add("fa-trash-can");
+        binDOM.classList.add("trash_ico");
+        imageDOM.classList.add("js-content-img")
+
         imageDOM.src = element.imageUrl;
-
-
+        imageDOM.alt = element.title;
+        // Indentation des éléments HTML
+        divDOM.appendChild(binDOM)
         divDOM.appendChild(imageDOM);
-        divDOM.appendChild(binDOM);
-        galleryDOM.appendChild(divDOM);
-
-    });*/
+        editionDOM.appendChild(divDOM)
+    });
 }
 
 

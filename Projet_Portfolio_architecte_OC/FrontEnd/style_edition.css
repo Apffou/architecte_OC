@@ -87,7 +87,10 @@ h2 .modale {
     right: 20px;
     background-color: #FFF;
     border: 0;
+}
 
+.js-modal-close i{
+    cursor: pointer;
 }
 
 .js-container-gallery{
