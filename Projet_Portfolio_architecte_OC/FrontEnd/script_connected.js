@@ -1,5 +1,3 @@
-
-
 let modal = null;
 
 // Fonction qui permet d'afficher la boite modale
@@ -10,20 +8,18 @@ const openModal = function (e) {
     modal.style.visibility = "visible";
     modal.removeAttribute('aria-hidden');
     modal.setAttribute('aria-modal', 'true');
-    // Click sur croix on ferme
+    // Click sur croix on ferme la modale
     modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
 }
 // Fonction qui permet de fermer la boite modale
 const closeModal = function (e) {
     e.preventDefault();
-    console.log("close")
     let modal = document.querySelector('#modal');
     modal.style.visibility = "hidden";
     modal.setAttribute('aria-hidden', 'true');
     modal.removeAttribute('aria-modal');
     e.target.removeEventListener('click', closeModal);
 }
-
 
 document.querySelectorAll('.js-modal').forEach(a => {
     a.addEventListener('click', openModal)
@@ -42,13 +38,11 @@ if (token) {
     modalTitle.innerText = "Galerie photo";
 
     // Appel de la ressource 
-    
     const worksRespons = await fetch("http://localhost:5678/api/works");
     const projects = await worksRespons.json();
     const editionDOM = document.querySelector(".js-container-gallery");
 
     projects.forEach(element => {
-        console.log("MORDUUUUUU")
         // Création des éléments HTML
         const divDOM = document.createElement("div");
         const binDOM = document.createElement("i");
@@ -57,7 +51,7 @@ if (token) {
         divDOM.classList.add("js-content");
         binDOM.classList.add("fa-solid");
         binDOM.classList.add("fa-trash-can");
-        binDOM.classList.add("trash_ico");
+        binDOM.classList.add("trash-ico");
         imageDOM.classList.add("js-content-img")
 
         imageDOM.src = element.imageUrl;
@@ -70,7 +64,15 @@ if (token) {
 }
 
 
+// Suppression d'un projet
 
+    const garbageDom = document.querySelectorAll(".trash-ico");
+    garbageDom.forEach(element => {
+        element.addEventListener('click', function(){
+
+            console.log("STUPEFLIP")
+        });
+    })
 
 
 // Cours. Pour la partie pour envoyer du texte, image revoir Types MIME
