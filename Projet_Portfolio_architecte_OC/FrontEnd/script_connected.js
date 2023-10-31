@@ -70,9 +70,7 @@ if (token) {
 
 
 /*
-   r "suppressionProjet(ID)" 
-[] Cette fonction :  
-    [] Envoi le fetch DELETE du projet ID
+
     [] Si on ne te renvoi pas d'erreur dans le JSON, selection de tous les elements HTML ayant data-projet="[ID]" 
     [] Pour chaque element trouvé, le supprimer du code (element.remove())*/ 
 
@@ -93,8 +91,10 @@ if (token) {
         });
 
         if (fetchDelete.status === 204){
-            const removeElement = document.querySelector(`div[data-projet='${id}']`);
-            removeElement.remove(); 
+            const removeElementModal = document.querySelector(`div[data-projet='${id}']`);
+            const removeElementProject = document.querySelector(`figure[data-projet='${id}']`);
+            removeElementModal.remove(); 
+            removeElementProject.remove(); 
 
             console.log("TU ME VOIS LAAAA")
             }
