@@ -49,9 +49,11 @@ if (token) {
         const imageDOM = document.createElement("img");
         // Ajout des class sur ces éléments
         divDOM.classList.add("js-content");
+        divDOM.dataset.projet = element.id;
         binDOM.classList.add("fa-solid");
         binDOM.classList.add("fa-trash-can");
         binDOM.classList.add("trash-ico");
+        binDOM.dataset.projet = element.id;
         imageDOM.classList.add("js-content-img")
 
         imageDOM.src = element.imageUrl;
@@ -66,21 +68,37 @@ if (token) {
 
     // Suppression d'un projet
 
-    const deleteWork = await fetch("http://localhost:5678/api/users/works", {
-        method: "DELETE",
-        headers: { "Authorization": `Bearer ${token}`},
 
-    });
-    console.log(deleteWork)
+/*
+   r "suppressionProjet(ID)" 
+[] Cette fonction :  
+    [] Envoi le fetch DELETE du projet ID
+    [] Si on ne te renvoi pas d'erreur dans le JSON, selection de tous les elements HTML ayant data-projet="[ID]" 
+    [] Pour chaque element trouvé, le supprimer du code (element.remove())*/ 
 
     const garbageDom = document.querySelectorAll(".trash-ico");
     garbageDom.forEach(element => {
         element.addEventListener('click', function(){
-            console.log("ihfzoeihfoeih")
+            const id = element.dataset.projet;
+            deleteProject(id);
+            })
             });
-    });
 
 
+    async function deleteProject(id){
+      const fetchDelete = await fetch("http://localhost:5678/api/works/"+id, {
+            method: "DELETE",
+            headers: { "Authorization": `Bearer ${token}`},
 
+        });
+
+        if (fetchDelete.status === 204){
+            const removeElement = document.querySelector(`div[data-projet='${id}']`);
+            removeElement.remove(); 
+
+            console.log("TU ME VOIS LAAAA")
+            }
+
+        }
 
 //  INFO DEUXIEME PARTICours. Pour la partie pour envoyer du texte, image revoir Types MIME

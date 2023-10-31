@@ -125,6 +125,7 @@ h2 .modale {
     top: 5px;
     right: 5px;
     padding: 2px;
+    cursor: pointer;
 }
 
 .btn_modale{
@@ -139,4 +140,5 @@ h2 .modale {
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    cursor: pointer;
 }

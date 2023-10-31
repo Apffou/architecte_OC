@@ -12,7 +12,7 @@ projects.forEach(element => {
     const figureDOM = document.createElement("figure")
     const projectImage = document.createElement("img");
     const projectLegend = document.createElement("figcaption");
-    figureDOM.setAttribute("id_filters", element.categoryId)
+    figureDOM.dataset.projet =  element.categoryId;
     projectImage.src = element.imageUrl;
     projectImage.alt = element.title;
     projectLegend.innerText = element.title;
@@ -43,7 +43,7 @@ tagsCategory.forEach(element => {
     elementFilter = document.createElement("span");
     elementFilter.classList.add("tag");
     elementFilter.innerText = element.name;
-    elementFilter.setAttribute("data-id", element.id)
+    elementFilter.dataset.id = element.id;
     parentFilters.appendChild(elementFilter);
 
 })
@@ -54,14 +54,13 @@ const elementFilterALL = document.querySelectorAll(".filters span");
 
 elementFilterALL.forEach(elementfilter => {
     elementfilter.addEventListener("click", function (event) {
-        let filtreID = event.target.getAttribute("data-id");
-        //dataset.id
-
-        // 
+        //let filtreID = event.target.getAttribute("data-id");
+        let filtreID = event.target.dataset.id;
+        console.log(filtreID)
         //const toti = document.querySelectorAll(".tag.tag_selected");
         //toti.forEach(element => {
-       //     element.classList.remove("tag_selected");
-       // })
+        //     element.classList.remove("tag_selected");
+        // })
 
         document.querySelector(".tag_selected").classList.remove("tag_selected");
 
@@ -73,7 +72,7 @@ elementFilterALL.forEach(elementfilter => {
         })
         //condition pour afficher les elements correspondant à l'ID
         if (filtreID) {
-            const filterID1 = document.querySelectorAll(`figure[id_filters='${filtreID}']`);
+            const filterID1 = document.querySelectorAll(`figure[data-projet='${filtreID}']`);
             filterID1.forEach(elementID1 => {
                 elementID1.style.display = "block";
 
