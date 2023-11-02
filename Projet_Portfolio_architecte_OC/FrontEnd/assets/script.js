@@ -12,7 +12,8 @@ projects.forEach(element => {
     const figureDOM = document.createElement("figure")
     const projectImage = document.createElement("img");
     const projectLegend = document.createElement("figcaption");
-    figureDOM.dataset.projet =  element.categoryId;
+    figureDOM.dataset.categoryId =  element.categoryId;
+    figureDOM.dataset.projet = element.id;
     projectImage.src = element.imageUrl;
     projectImage.alt = element.title;
     projectLegend.innerText = element.title;
@@ -72,7 +73,7 @@ elementFilterALL.forEach(elementfilter => {
         })
         //condition pour afficher les elements correspondant à l'ID
         if (filtreID) {
-            const filterID1 = document.querySelectorAll(`figure[data-projet='${filtreID}']`);
+            const filterID1 = document.querySelectorAll(`figure[data-category-id='${filtreID}']`);
             filterID1.forEach(elementID1 => {
                 elementID1.style.display = "block";
 
