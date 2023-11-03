@@ -87,6 +87,7 @@
 			</div>
 		</section>
 		<section id="contact">
+			<!-- 
 			<h2>Contact</h2>
 			<p>Vous avez un projet ? Discutons-en !</p>
 			<form action="#" method="post">
@@ -97,7 +98,29 @@
 				<label for="message">Message</label>
 				<textarea name="message" id="message" cols="30" rows="10"></textarea>
 				<input type="submit" value="Envoyer">
-			</form>
+			</form> -->
+
+			<div class="form-wrapper">
+				<div class="image-sendbox">
+					<i class="fa-solid fa-mountain-sun fa-flip-horizontal fa-2xl"></i>
+					<label for="add-img">+ Ajouter une photo</label>
+					<input id="add-img" type="file">
+					<p>jpg, png : 4 mo</p>
+				</div>
+				<form action="#" method="post" class="js-form" id="add-form">
+					<label for="Titre">Titre</label>
+					<input type="text" name="titre" id="Titre">
+					<label for="Category">Catégorie:</label>
+
+					<select name="Categorie" id="Category-select">
+						<option value=""></option>
+						<option value="1">Objets</option>
+						<option value="2">Appartements</option>
+						<option value="3">Hotels & restaurants</option>
+					</select>
+					<button type="submit">Validez</button>
+				</form>
+			</div>
 
 		</section>
 	</main>

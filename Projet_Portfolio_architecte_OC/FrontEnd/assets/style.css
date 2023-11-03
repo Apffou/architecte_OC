@@ -267,7 +267,7 @@ li a:hover {
 	flex-direction: column;
 }
 
-#contact input {
+.contact input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;

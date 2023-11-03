@@ -1,12 +1,12 @@
 let modal = null;
-let step = 0; 
+let step = 0;
 
 
 // Fonction pour afficher la bonne étape dans la modale
-function stepUpdate(step){
+function stepUpdate(step) {
     //Si on a un mauvais un numero d'étape, la fonction ne se lance pas. 
     if (step < 1)
-    return;
+        return;
 
     const modalStep = document.querySelectorAll(".modal-step");
     modalStep.forEach(element => {
@@ -14,7 +14,7 @@ function stepUpdate(step){
 
         const totot = element.dataset.step;
         console.log(totot)
-        if ( totot == step){
+        if (totot == step) {
             element.style.display = "block";
             console.log("toto1")
         }
@@ -24,7 +24,7 @@ function stepUpdate(step){
 // Fonction qui permet d'afficher la boite modale
 const openModal = function (e) {
     e.preventDefault();
-    step=1;
+    step = 1;
     stepUpdate(step);
     // On recupère la modale
     const modal = document.querySelector(e.target.getAttribute('href'));
@@ -32,8 +32,8 @@ const openModal = function (e) {
     modal.removeAttribute('aria-hidden');
     modal.setAttribute('aria-modal', 'true');
 
-   
-    
+
+
     // Click sur croix on ferme la modale
     modal.querySelector('.js-modal-close').addEventListener('click', closeModal);
 }
@@ -53,8 +53,8 @@ document.querySelectorAll('.js-modal').forEach(a => {
 
 // Fermeture de la modale au click en dehors de celle ci 
 const asideClose = document.querySelector("#wrapper-modal");
-asideClose.addEventListener('click', function(e) {
-    if (e.target === asideClose){
+asideClose.addEventListener('click', function (e) {
+    if (e.target === asideClose) {
         asideClose.style.visibility = "hidden";
     }
 })
@@ -97,34 +97,32 @@ if (token) {
 }
 
 
-    // Suppression d'un projet
+// Suppression d'un projet
 
 
-    const garbageDom = document.querySelectorAll(".trash-ico");
-    garbageDom.forEach(element => {
-        element.addEventListener('click', function(){
-            const id = element.dataset.projet;
-            deleteProject(id);
-            })
-            });
+const garbageDom = document.querySelectorAll(".trash-ico");
+garbageDom.forEach(element => {
+    element.addEventListener('click', function () {
+        const id = element.dataset.projet;
+        deleteProject(id);
+    })
+});
 
 
-    async function deleteProject(id){
-      const fetchDelete = await fetch("http://localhost:5678/api/works/"+id, {
-            method: "DELETE",
-            headers: { "Authorization": `Bearer ${token}`},
+async function deleteProject(id) {
+    const fetchDelete = await fetch("http://localhost:5678/api/works/" + id, {
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${token}` },
 
-        });
+    });
 
-        if (fetchDelete.status === 204){
-            const removeElementModal = document.querySelector(`div[data-projet='${id}']`);
-            const removeElementProject = document.querySelector(`figure[data-projet='${id}']`);
-            removeElementModal.remove(); 
-            removeElementProject.remove(); 
-            
-            }
-
-        }
+    if (fetchDelete.status === 204) {
+        const removeElementModal = document.querySelector(`div[data-projet='${id}']`);
+        const removeElementProject = document.querySelector(`figure[data-projet='${id}']`);
+        removeElementModal.remove();
+        removeElementProject.remove();
+    }
+}
 
 
 // Au click sur le bouton ajouter une photo, vider la modale et remplacer par un autre contenu html. 
@@ -136,57 +134,12 @@ if (token) {
 
 const btnModale = document.querySelector(".btn_modale");
 const modalWrapper = document.querySelector(".modal-wrapper");
-btnModale.addEventListener('click' , function(){
+btnModale.addEventListener('click', function () {
     step = 2;
     stepUpdate(step);
-    return;
-    const arrowDOM = document.createElement("i");
-        arrowDOM.classList.add("fa-solid", "fa-arrow-left", "fa-xl");
-    const crossDom = document.createElement("i");
-        crossDom.classList.add("fa-solid", "fa-xmark", "fa-xl");
+    let modalTitle = document.querySelector(".modal-step h1")
+    modalTitle.innerText = "Ajout photo";
 
-        let modalTitle = document.querySelector(".modal-wrapper h1")
-        modalTitle.innerText = "Ajout photo";
-       // const btn =   document.querySelector(".modal-wrapper .btn_modale")
-        //btn.innerText ="+ Ajouter photo";
-
-    const divAddContentBlockDOM = document.createElement("div");
-        divAddContentBlockDOM.classList.add("js-add-content-block")
-    const divAddContent = document.createElement("div");
-        divAddContent.classList.add("js-add-content");
-            const iconeDOM = document.createElement("i");
-                iconeDOM.classList.add("fa-solid", "fa-mountain-sun", "fa-flip-horizontal", "fa-2xl", "js-icone")
-            const buttonAddDOM = document.createElement("button");
-                buttonAddDOM.innerText = "+ Ajouter photo";
-                buttonAddDOM.classList.add("js-button-add");
-            const cautionParagraphe = document.createElement("p");
-                cautionParagraphe.innerText = "jpg, png : 4 mo max";
-    // Création du formulaire et du bouton de validation par interpolation
-    const divAddFormDOM = document.createElement("div");
-        divAddFormDOM.classList.add("form-parent");
-    const formDOM = `
-			<form action="#" method="post" class="js-form" id="add-form">
-				<label for="Titre">Titre</label>
-				<input type="text" name="titre" id="Titre">
-				<label for="Category">Catégorie:</label>
-			
-				<select name="Categorie" id="Category-select">
-				  <option value=""></option>
-				  <option value="1">Objets</option>
-				  <option value="2">Appartements</option>
-				  <option value="3">Hotels & restaurants</option>
-				</select>
-				</form>
-    `;
-    const buttonDiv = document.createElement("div");
-        buttonDiv.classList.add("btn-add-content")
-    const btnAddContent = `
-    <button type="submit" id="add-form"> Valider </button>
-    `;
-
-
-    modalWrapper.appendChild(arrowDOM);
-    modalWrapper.appendChild(crossDom);
     modalWrapper.appendChild(divAddContentBlockDOM);
     modalWrapper.appendChild(buttonDiv);
 
@@ -196,14 +149,60 @@ btnModale.addEventListener('click' , function(){
     divAddContent.appendChild(buttonAddDOM);
     divAddContent.appendChild(cautionParagraphe);
     divAddContentBlockDOM.appendChild(divAddFormDOM);
-    divAddFormDOM.innerHTML= formDOM;
+    divAddFormDOM.innerHTML = formDOM;
 
-    buttonDiv.innerHTML =btnAddContent;
+    buttonDiv.innerHTML = btnAddContent;
 
-} )
+})
+
+
+//  !!!! RECUPERATION DES ELEMENTS DU FORMULAIRE
 
 
 
+const formElement = document.getElementById("add-form");
+formElement.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const formContent = {
+        image : "",
+        title : document.getElementById("Titre").value,
+        category : document.getElementById("Category-select").value,
+    }
+
+    var formData = new FormData();
+
+    formData.append("title", "sheldon");
+    formData.append("category", 2); 
+    var content = '<a id="a"><b id="b">hey!</b></a>'; // the body of the new file...
+    var blob = new Blob([content], { type: "text/xml" });
+    
+    formData.append("image", blob);
+
+
+    var request = new XMLHttpRequest();
+request.open("POST", "http://localhost:5678/api/works");
+request.setRequestHeader("Authorization", `Bearer ${token}`);
+request.send(formData);
+console.log(request)
+console.log(request.status)
+
+    //Appel de la fonction dans le back end
+    const callFetch = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        body: formData,
+        headers: { "Authorization": `Bearer ${token}`,
+    
+            "Content-Type": "multipart/form-data"
+         }
+
+    });
+    console.log(callFetch)
+    //const responsFetch = await callFetch.json();
+
+
+}
+)
 
 
 
