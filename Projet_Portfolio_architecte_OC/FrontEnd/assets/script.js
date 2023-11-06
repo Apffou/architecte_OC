@@ -57,7 +57,7 @@ elementFilterALL.forEach(elementfilter => {
     elementfilter.addEventListener("click", function (event) {
         //let filtreID = event.target.getAttribute("data-id");
         let filtreID = event.target.dataset.id;
-        console.log(filtreID)
+
         //const toti = document.querySelectorAll(".tag.tag_selected");
         //toti.forEach(element => {
         //     element.classList.remove("tag_selected");

@@ -34,18 +34,40 @@
 				<div class="modal-step" data-step="1">
 					<h1>Galerie photo</h1>
 					<div class="js-container-gallery">
-
 					</div>
-					<button class="btn_modale" type="submit" value="Ajouter une photo" class="">Ajouter une
-						photo</button>
+					<div class="btn-modale-content">
+						<button class="btn_modale" type="submit" value="Ajouter une photo" class="">
+							Ajouter une photo
+						</button>
+					</div>
 				</div>
 				<div class="modal-step" data-step="2">
 					<h1></h1>
 					<div class="form-wrapper">
+						<form action="#" method="post" class="js-form" id="add-form">
+							<div class="image-sendbox">
+								<i class="fa-solid fa-mountain-sun fa-flip-horizontal fa-2xl"></i>
+								<label for="add-img">+ Ajouter une photo</label>
+								<input id="add-img" type="file" name="image">
+								<p>jpg, png : 4 mo</p>
+							</div>
 
+							<label for="Titre">Titre</label>
+							<input type="text" name="title" id="Titre">
+							<label for="Category">Catégorie:</label>
+
+							<select name="category" id="Category-select">
+								<option value=""></option>
+								<option value="1">Objets</option>
+								<option value="2">Appartements</option>
+								<option value="3">Hotels & restaurants</option>
+							</select>
+							<div class="btn-modale-content">
+								<button type="submit" class="btn_modale" disabled>Valider</button>
+							</div>
+
+						</form>
 					</div>
-					<button class="btn_modale" type="submit" value="Ajouter une photo" class="">Ajouter une
-						photo</button>
 				</div>
 			</div>
 		</div>
@@ -101,24 +123,25 @@
 			</form> -->
 
 			<div class="form-wrapper">
-				<div class="image-sendbox">
-					<i class="fa-solid fa-mountain-sun fa-flip-horizontal fa-2xl"></i>
-					<label for="add-img">+ Ajouter une photo</label>
-					<input id="add-img" type="file">
-					<p>jpg, png : 4 mo</p>
-				</div>
 				<form action="#" method="post" class="js-form" id="add-form">
+					<div class="image-sendbox">
+						<i class="fa-solid fa-mountain-sun fa-flip-horizontal fa-2xl"></i>
+						<label for="add-img">+ Ajouter une photo</label>
+						<input id="add-img" type="file" name="image">
+						<p>jpg, png : 4 mo</p>
+					</div>
+
 					<label for="Titre">Titre</label>
-					<input type="text" name="titre" id="Titre">
+					<input type="text" name="title" id="Titre">
 					<label for="Category">Catégorie:</label>
 
-					<select name="Categorie" id="Category-select">
+					<select name="category" id="Category-select">
 						<option value=""></option>
 						<option value="1">Objets</option>
 						<option value="2">Appartements</option>
 						<option value="3">Hotels & restaurants</option>
 					</select>
-					<button type="submit">Validez</button>
+					<button type="submit" class="btn-form" disabled>Valider</button>
 				</form>
 			</div>
 

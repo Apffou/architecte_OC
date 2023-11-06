@@ -13,10 +13,8 @@ function stepUpdate(step) {
         element.style.display = "none";
 
         const totot = element.dataset.step;
-        console.log(totot)
         if (totot == step) {
             element.style.display = "block";
-            console.log("toto1")
         }
     })
 }
@@ -125,8 +123,7 @@ async function deleteProject(id) {
 }
 
 
-// Au click sur le bouton ajouter une photo, vider la modale et remplacer par un autre contenu html. 
-// Creation du formulaire
+
 //Ne pas oublier le message d'erreur si le formulaire n'est pas correctement rempli 
 //Afficher une reponse de l'api si le formulaire est correctement envoyé 
 // au rechargment de la page, le nouveau projet doit s'afficher dans la galerie
@@ -158,8 +155,6 @@ btnModale.addEventListener('click', function () {
 
 //  !!!! RECUPERATION DES ELEMENTS DU FORMULAIRE
 
-
-
 const formElement = document.getElementById("add-form");
 formElement.addEventListener("submit", async function (event) {
     event.preventDefault();
@@ -170,40 +165,52 @@ formElement.addEventListener("submit", async function (event) {
         category : document.getElementById("Category-select").value,
     }
 
-    var formData = new FormData();
+    var formData = new FormData(this);
 
-    formData.append("title", "sheldon");
-    formData.append("category", 2); 
-    var content = '<a id="a"><b id="b">hey!</b></a>'; // the body of the new file...
-    var blob = new Blob([content], { type: "text/xml" });
-    
-    formData.append("image", blob);
+    if(formContent.title = null , formContent.category = null){
 
-
-    var request = new XMLHttpRequest();
-request.open("POST", "http://localhost:5678/api/works");
-request.setRequestHeader("Authorization", `Bearer ${token}`);
-request.send(formData);
-console.log(request)
-console.log(request.status)
+    }
 
     //Appel de la fonction dans le back end
     const callFetch = await fetch("http://localhost:5678/api/works", {
         method: "POST",
         body: formData,
         headers: { "Authorization": `Bearer ${token}`,
-    
-            "Content-Type": "multipart/form-data"
          }
-
     });
     console.log(callFetch)
     //const responsFetch = await callFetch.json();
-
-
 }
 )
 
+// Si tous les champs sont remplis alors le bouton devient vert et cliquable. 
+
+document.getElementById('add-form').addEventListener('change', function(){
+    const checkValue = "#add-img, #Titre, #Category-select";
+    const allFilled = checkValue.split(', ').every(selector => {
+        console.log(selector);
+        console.log(document.querySelector(selector));
+        return document.querySelector(selector).value;
+    });
+    console.log(allFilled)
+    if (allFilled) {
+        document.querySelector('#add-form [type="submit"]').removeAttribute('disabled');
+    }else{
+        document.querySelector('#add-form [type="submit"]').setAttribute('disabled', 'disabled');
+    }
+});
 
 
 //  INFO DEUXIEME PARTICours. Pour la partie pour envoyer du texte, image revoir Types MIME
+
+// affichage de l'image dans la console
+document.getElementById('add-img').addEventListener('change', function(e){
+    console.log(this.files[0]);
+    console.log(e.target.result);
+    document.querySelector('.image-sendbox label').innerHTML = `<img>`;
+    const reader = new FileReader();
+    reader.onload = function(e){
+        document.querySelector('.image-sendbox label img').src = e.target.result;
+    }
+    reader.readAsDataURL(this.files[0]);
+});
