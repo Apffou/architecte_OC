@@ -243,6 +243,8 @@ li a:hover {
 
 .gallery img {
 	width: 100%;
+	height: 489px;
+    object-fit: cover;
 
 }
 
@@ -267,7 +269,7 @@ li a:hover {
 	flex-direction: column;
 }
 
-.contact input {
+#contact input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;

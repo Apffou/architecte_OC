@@ -22,7 +22,7 @@
 	<aside id="wrapper-modal" class="modal" aria-hidden="true">
 		<div class="modal-wrapper js-modal-stop">
 			<div class="header">
-				<button>
+				<button class="arrow">
 					<i class="fa-solid fa-arrow-left fa-xl"></i>
 				</button>
 				<button class="js-modal-close">
@@ -41,7 +41,7 @@
 						</button>
 					</div>
 				</div>
-				<div class="modal-step" data-step="2">
+				<div class="modal-step title-modal-2" data-step="2">
 					<h1></h1>
 					<div class="form-wrapper">
 						<form action="#" method="post" class="js-form" id="add-form">
@@ -55,13 +55,13 @@
 							<label for="Titre">Titre</label>
 							<input type="text" name="title" id="Titre">
 							<label for="Category">Catégorie:</label>
-
 							<select name="category" id="Category-select">
 								<option value=""></option>
 								<option value="1">Objets</option>
 								<option value="2">Appartements</option>
 								<option value="3">Hotels & restaurants</option>
 							</select>
+						
 							<div class="btn-modale-content">
 								<button type="submit" class="btn_modale" disabled>Valider</button>
 							</div>
@@ -80,7 +80,7 @@
 				<ul>
 					<li>projets</li>
 					<li>contact</li>
-					<li><a href="login.html">login</a></li>
+					<li id="id-logout"><a href="login.html">login</a></li>
 					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 				</ul>
 			</nav>
@@ -109,7 +109,6 @@
 			</div>
 		</section>
 		<section id="contact">
-			<!-- 
 			<h2>Contact</h2>
 			<p>Vous avez un projet ? Discutons-en !</p>
 			<form action="#" method="post">
@@ -120,31 +119,7 @@
 				<label for="message">Message</label>
 				<textarea name="message" id="message" cols="30" rows="10"></textarea>
 				<input type="submit" value="Envoyer">
-			</form> -->
-
-			<div class="form-wrapper">
-				<form action="#" method="post" class="js-form" id="add-form">
-					<div class="image-sendbox">
-						<i class="fa-solid fa-mountain-sun fa-flip-horizontal fa-2xl"></i>
-						<label for="add-img">+ Ajouter une photo</label>
-						<input id="add-img" type="file" name="image">
-						<p>jpg, png : 4 mo</p>
-					</div>
-
-					<label for="Titre">Titre</label>
-					<input type="text" name="title" id="Titre">
-					<label for="Category">Catégorie:</label>
-
-					<select name="category" id="Category-select">
-						<option value=""></option>
-						<option value="1">Objets</option>
-						<option value="2">Appartements</option>
-						<option value="3">Hotels & restaurants</option>
-					</select>
-					<button type="submit" class="btn-form" disabled>Valider</button>
-				</form>
-			</div>
-
+			</form> 
 		</section>
 	</main>
 

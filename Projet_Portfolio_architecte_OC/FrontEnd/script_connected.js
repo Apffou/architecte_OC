@@ -1,7 +1,6 @@
 let modal = null;
 let step = 0;
 
-
 // Fonction pour afficher la bonne étape dans la modale
 function stepUpdate(step) {
     //Si on a un mauvais un numero d'étape, la fonction ne se lance pas. 
@@ -29,8 +28,10 @@ const openModal = function (e) {
     modal.style.visibility = "visible";
     modal.removeAttribute('aria-hidden');
     modal.setAttribute('aria-modal', 'true');
-
-
+    if (step === 1) {
+        const arrow = document.querySelector(".arrow");
+        arrow.style.display = "none";
+    }
 
     // Click sur croix on ferme la modale
     modal.querySelector('.js-modal-close').addEventListener('click', closeModal);
@@ -62,9 +63,11 @@ asideClose.addEventListener('click', function (e) {
 const token = window.localStorage.getItem("token");
 if (token) {
     const domVisible = document.querySelectorAll(".visible");
+
     domVisible.forEach(element => {
         element.style.visibility = "visible";
     })
+    document.getElementById('id-logout').innerHTML ="logout";
     let modalTitle = document.querySelector(".modal-wrapper h1")
     modalTitle.innerText = "Galerie photo";
 
@@ -95,7 +98,7 @@ if (token) {
 }
 
 
-// Suppression d'un projet
+// Suppression d'un projet Modale Step 1
 
 
 const garbageDom = document.querySelectorAll(".trash-ico");
@@ -126,7 +129,6 @@ async function deleteProject(id) {
 
 //Ne pas oublier le message d'erreur si le formulaire n'est pas correctement rempli 
 //Afficher une reponse de l'api si le formulaire est correctement envoyé 
-// au rechargment de la page, le nouveau projet doit s'afficher dans la galerie
 
 
 const btnModale = document.querySelector(".btn_modale");
@@ -134,22 +136,16 @@ const modalWrapper = document.querySelector(".modal-wrapper");
 btnModale.addEventListener('click', function () {
     step = 2;
     stepUpdate(step);
-    let modalTitle = document.querySelector(".modal-step h1")
-    modalTitle.innerText = "Ajout photo";
-
-    modalWrapper.appendChild(divAddContentBlockDOM);
-    modalWrapper.appendChild(buttonDiv);
-
-
-    divAddContentBlockDOM.appendChild(divAddContent);
-    divAddContent.appendChild(iconeDOM);
-    divAddContent.appendChild(buttonAddDOM);
-    divAddContent.appendChild(cautionParagraphe);
-    divAddContentBlockDOM.appendChild(divAddFormDOM);
-    divAddFormDOM.innerHTML = formDOM;
-
-    buttonDiv.innerHTML = btnAddContent;
-
+    let modalTitle = document.querySelector(".title-modal-2 h1")
+    modalTitle.innerHTML = "Ajout photo";
+    // Affichage de la flèche quand on est sur modale step 2 
+    if (step === 2) {
+        const arrow = document.querySelector(".arrow");
+        arrow.style.display = "block";
+    }
+    else {
+        arrow.style.display = "none";
+    }
 })
 
 
@@ -178,8 +174,6 @@ formElement.addEventListener("submit", async function (event) {
         headers: { "Authorization": `Bearer ${token}`,
          }
     });
-    console.log(callFetch)
-    //const responsFetch = await callFetch.json();
 }
 )
 
@@ -192,16 +186,12 @@ document.getElementById('add-form').addEventListener('change', function(){
         console.log(document.querySelector(selector));
         return document.querySelector(selector).value;
     });
-    console.log(allFilled)
     if (allFilled) {
         document.querySelector('#add-form [type="submit"]').removeAttribute('disabled');
     }else{
         document.querySelector('#add-form [type="submit"]').setAttribute('disabled', 'disabled');
     }
 });
-
-
-//  INFO DEUXIEME PARTICours. Pour la partie pour envoyer du texte, image revoir Types MIME
 
 // affichage de l'image dans la console
 document.getElementById('add-img').addEventListener('change', function(e){
