@@ -1,10 +1,36 @@
-//import {fetchWorks} from './functions.js';
 async function fetchWorks() {
     const worksRespons = await fetch("http://localhost:5678/api/works");
-    const queryResult = await worksRespons.json();
-    return queryResult;
-}
+    const projects = await worksRespons.json();
+    const editionDOM = document.querySelector(".js-container-gallery");
+    projects.forEach(element => {
+        // Création des éléments HTML
+        const divDOM = document.createElement("div");
+        const binDOM = document.createElement("i");
+        const imageDOM = document.createElement("img");
+        // Ajout des class sur ces éléments
+        divDOM.classList.add("js-content");
+        divDOM.dataset.projet = element.id;
+        binDOM.classList.add("fa-solid", "fa-trash-can", "trash-ico");
+        binDOM.dataset.projet = element.id;
+        imageDOM.classList.add("js-content-img")
 
+        imageDOM.src = element.imageUrl;
+        imageDOM.alt = element.title;
+        // Indentation des éléments HTML
+        divDOM.appendChild(binDOM)
+        divDOM.appendChild(imageDOM);
+        editionDOM.appendChild(divDOM)
+    });
+
+    // Suppression d'un projet Modale Step 1 au clic 
+    const garbageDom = document.querySelectorAll(".trash-ico");
+    garbageDom.forEach(element => {
+        element.addEventListener('click', function () {
+            const id = element.dataset.projet;
+            deleteProject(id);
+        })
+    });
+}
 
 let modal = null;
 let step = 0;
@@ -81,40 +107,12 @@ if (token) {
     let modalTitle = document.querySelector(".modal-wrapper h1")
     modalTitle.innerText = "Galerie photo";
 
-    // Appel de la ressource 
-
-    const editionDOM = document.querySelector(".js-container-gallery");
-    const projects = await fetchWorks();
-    projects.forEach(element => {
-        // Création des éléments HTML
-        const divDOM = document.createElement("div");
-        const binDOM = document.createElement("i");
-        const imageDOM = document.createElement("img");
-        // Ajout des class sur ces éléments
-        divDOM.classList.add("js-content");
-        divDOM.dataset.projet = element.id;
-        binDOM.classList.add("fa-solid", "fa-trash-can", "trash-ico");
-        binDOM.dataset.projet = element.id;
-        imageDOM.classList.add("js-content-img")
-
-        imageDOM.src = element.imageUrl;
-        imageDOM.alt = element.title;
-        // Indentation des éléments HTML
-        divDOM.appendChild(binDOM)
-        divDOM.appendChild(imageDOM);
-        editionDOM.appendChild(divDOM)
-    });
+    // Appel de la fonction qui créer mes projets supprimable 
+    fetchWorks();
 }
 
 
-// Suppression d'un projet Modale Step 1 au clic 
-const garbageDom = document.querySelectorAll(".trash-ico");
-garbageDom.forEach(element => {
-    element.addEventListener('click', function () {
-        const id = element.dataset.projet;
-        deleteProject(id);
-    })
-});
+
 
 async function deleteProject(id) {
     const fetchDelete = await fetch("http://localhost:5678/api/works/" + id, {
@@ -183,27 +181,11 @@ formElement.addEventListener("submit", async function (event) {
         stepUpdate(step);
         formElement.reset()
         const editionDOM = document.querySelector(".js-container-gallery");
-        editionDOM.innerHTML="";
-        const projects = await fetchWorks();
-        projects.forEach(element => {
-            // Création des éléments HTML
-            const divDOM = document.createElement("div");
-            const binDOM = document.createElement("i");
-            const imageDOM = document.createElement("img");
-            // Ajout des class sur ces éléments
-            divDOM.classList.add("js-content");
-            divDOM.dataset.projet = element.id;
-            binDOM.classList.add("fa-solid", "fa-trash-can", "trash-ico");
-            binDOM.dataset.projet = element.id;
-            imageDOM.classList.add("js-content-img")
-    
-            imageDOM.src = element.imageUrl;
-            imageDOM.alt = element.title;
-            // Indentation des éléments HTML
-            divDOM.appendChild(binDOM)
-            divDOM.appendChild(imageDOM);
-            editionDOM.appendChild(divDOM)
-        });
+        editionDOM.innerHTML = "";
+        const galleryDOM = document.querySelector(".gallery");
+        fetchWorks();
+        galleryDOM.innerHTML = "";
+        CreateProjectElementHtml();
     }
 }
 )
@@ -236,3 +218,4 @@ document.getElementById('add-img').addEventListener('change', function (e) {
     }
     reader.readAsDataURL(this.files[0]);
 });
+

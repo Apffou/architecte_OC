@@ -1,30 +1,5 @@
 // Appel de la ressource 
-
-
-const worksRespons = await fetch("http://localhost:5678/api/works");
-const projects = await worksRespons.json();
-
-
-const galleryDOM = document.querySelector(".gallery");
-
-
-// Boucle sur tableau pour creer les elements Projets du site
-projects.forEach(element => {
-
-    const figureDOM = document.createElement("figure")
-    const projectImage = document.createElement("img");
-    const projectLegend = document.createElement("figcaption");
-    figureDOM.dataset.categoryId =  element.categoryId;
-    figureDOM.dataset.projet = element.id;
-    projectImage.src = element.imageUrl;
-    projectImage.alt = element.title;
-    projectLegend.innerText = element.title;
-
-    figureDOM.appendChild(projectImage);
-    figureDOM.appendChild(projectLegend);
-    galleryDOM.appendChild(figureDOM);
-});
-
+CreateProjectElementHtml();
 
 const categoryRespons = await fetch("http://localhost:5678/api/categories");
 const tagsCategory = await categoryRespons.json();
@@ -53,8 +28,6 @@ tagsCategory.forEach(element => {
 
 
 const elementFilterALL = document.querySelectorAll(".filters span");
-
-
 elementFilterALL.forEach(elementfilter => {
     elementfilter.addEventListener("click", function (event) {
         //let filtreID = event.target.getAttribute("data-id");
