@@ -1,37 +1,3 @@
-async function fetchWorks() {
-    const worksRespons = await fetch("http://localhost:5678/api/works");
-    const projects = await worksRespons.json();
-    const editionDOM = document.querySelector(".js-container-gallery");
-    projects.forEach(element => {
-        // Création des éléments HTML
-        const divDOM = document.createElement("div");
-        const binDOM = document.createElement("i");
-        const imageDOM = document.createElement("img");
-        // Ajout des class sur ces éléments
-        divDOM.classList.add("js-content");
-        divDOM.dataset.projet = element.id;
-        binDOM.classList.add("fa-solid", "fa-trash-can", "trash-ico");
-        binDOM.dataset.projet = element.id;
-        imageDOM.classList.add("js-content-img")
-
-        imageDOM.src = element.imageUrl;
-        imageDOM.alt = element.title;
-        // Indentation des éléments HTML
-        divDOM.appendChild(binDOM)
-        divDOM.appendChild(imageDOM);
-        editionDOM.appendChild(divDOM)
-    });
-
-    // Suppression d'un projet Modale Step 1 au clic 
-    const garbageDom = document.querySelectorAll(".trash-ico");
-    garbageDom.forEach(element => {
-        element.addEventListener('click', function () {
-            const id = element.dataset.projet;
-            deleteProject(id);
-        })
-    });
-}
-
 let modal = null;
 let step = 0;
 
@@ -102,35 +68,12 @@ if (token) {
     domVisible.forEach(element => {
         element.style.visibility = "visible";
     })
-
-    document.getElementById('id-logout').innerHTML = "logout";
     let modalTitle = document.querySelector(".modal-wrapper h1")
     modalTitle.innerText = "Galerie photo";
-
+    document.getElementById('id-logout').innerHTML = "logout";
     // Appel de la fonction qui créer mes projets supprimable 
     fetchWorks();
 }
-
-
-
-
-async function deleteProject(id) {
-    const fetchDelete = await fetch("http://localhost:5678/api/works/" + id, {
-        method: "DELETE",
-        headers: { "Authorization": `Bearer ${token}` },
-
-    });
-
-    if (fetchDelete.status === 204) {
-        const removeElementModal = document.querySelector(`div[data-projet='${id}']`);
-        const removeElementProject = document.querySelector(`figure[data-projet='${id}']`);
-        removeElementModal.remove();
-        removeElementProject.remove();
-    }
-}
-
-//Ne pas oublier le message d'erreur si le formulaire n'est pas correctement rempli 
-//Afficher une reponse de l'api si le formulaire est correctement envoyé 
 
 
 const btnModale = document.querySelector(".btn_modale");
@@ -152,9 +95,7 @@ btnModale.addEventListener('click', function () {
     }
 })
 
-
-
-//  RECUPERATION DES ELEMENTS DU FORMULAIRE
+//  RECUPERATION DES ELEMENTS DU FORMULAIRE et envoi du formulaire
 
 const formElement = document.getElementById("add-form");
 formElement.addEventListener("submit", async function (event) {
@@ -179,13 +120,16 @@ formElement.addEventListener("submit", async function (event) {
     if (callFetch.status === 201) {
         step = 1;
         stepUpdate(step);
-        formElement.reset()
+        const img = document.querySelector('.image-sendbox label img');
+        img.remove();
+        formElement.reset();
         const editionDOM = document.querySelector(".js-container-gallery");
         editionDOM.innerHTML = "";
         const galleryDOM = document.querySelector(".gallery");
         fetchWorks();
         galleryDOM.innerHTML = "";
         CreateProjectElementHtml();
+        
     }
 }
 )
@@ -195,8 +139,6 @@ formElement.addEventListener("submit", async function (event) {
 document.getElementById('add-form').addEventListener('change', function () {
     const checkValue = "#add-img, #Titre, #Category-select";
     const allFilled = checkValue.split(', ').every(selector => {
-        console.log(selector);
-        console.log(document.querySelector(selector));
         return document.querySelector(selector).value;
     });
     if (allFilled) {
@@ -208,14 +150,13 @@ document.getElementById('add-form').addEventListener('change', function () {
 });
 
 // affichage de l'image dans la console
-document.getElementById('add-img').addEventListener('change', function (e) {
+ document.getElementById('add-img').addEventListener('change', function (e) {
     console.log(this.files[0]);
     console.log(e.target.result);
     document.querySelector('.image-sendbox label').innerHTML = `<img>`;
     const reader = new FileReader();
     reader.onload = function (e) {
-        document.querySelector('.image-sendbox label img').src = e.target.result;
+     document.querySelector('.image-sendbox label img').src = e.target.result;
     }
     reader.readAsDataURL(this.files[0]);
 });
-

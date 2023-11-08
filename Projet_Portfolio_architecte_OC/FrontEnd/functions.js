@@ -1,4 +1,31 @@
-/*async function fetchWorks() {
+//Fonction pour créer un projet dans la page html
+async function CreateProjectElementHtml () {
+  const worksRespons = await fetch("http://localhost:5678/api/works");
+  const projects = await worksRespons.json();
+  
+  const galleryDOM = document.querySelector(".gallery");
+  
+  // Boucle sur tableau pour creer les elements Projets du site
+  projects.forEach(element => {
+  
+      const figureDOM = document.createElement("figure")
+      const projectImage = document.createElement("img");
+      const projectLegend = document.createElement("figcaption");
+      figureDOM.dataset.categoryId =  element.categoryId;
+      figureDOM.dataset.projet = element.id;
+      projectImage.src = element.imageUrl;
+      projectImage.alt = element.title;
+      projectLegend.innerText = element.title;
+  
+      figureDOM.appendChild(projectImage);
+      figureDOM.appendChild(projectLegend);
+      galleryDOM.appendChild(figureDOM);
+  });
+}
+
+
+//Fonction pour Créer les projets dans la modale
+async function fetchWorks() {
   const worksRespons = await fetch("http://localhost:5678/api/works");
   const projects = await worksRespons.json();
   const editionDOM = document.querySelector(".js-container-gallery");
@@ -32,7 +59,7 @@
   });
 }
 
-
+// Fonction pour supprimer les projets dans la modale
 async function deleteProject(id) {
   const fetchDelete = await fetch("http://localhost:5678/api/works/" + id, {
       method: "DELETE",
@@ -46,28 +73,6 @@ async function deleteProject(id) {
       removeElementModal.remove();
       removeElementProject.remove();
   }
-}*/
-
-async function CreateProjectElementHtml () {
-  const worksRespons = await fetch("http://localhost:5678/api/works");
-  const projects = await worksRespons.json();
-  
-  const galleryDOM = document.querySelector(".gallery");
-  
-  // Boucle sur tableau pour creer les elements Projets du site
-  projects.forEach(element => {
-  
-      const figureDOM = document.createElement("figure")
-      const projectImage = document.createElement("img");
-      const projectLegend = document.createElement("figcaption");
-      figureDOM.dataset.categoryId =  element.categoryId;
-      figureDOM.dataset.projet = element.id;
-      projectImage.src = element.imageUrl;
-      projectImage.alt = element.title;
-      projectLegend.innerText = element.title;
-  
-      figureDOM.appendChild(projectImage);
-      figureDOM.appendChild(projectLegend);
-      galleryDOM.appendChild(figureDOM);
-  });
 }
+
+
