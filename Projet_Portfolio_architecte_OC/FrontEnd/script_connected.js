@@ -72,8 +72,9 @@ if (token) {
     modalTitle.innerText = "Galerie photo";
     document.getElementById('id-logout').innerHTML = "logout";
     // Appel de la fonction qui créer mes projets supprimable 
-    fetchWorks();
+    CreateProjectElementModale();
 }
+
 
 
 const btnModale = document.querySelector(".btn_modale");
@@ -95,7 +96,9 @@ btnModale.addEventListener('click', function () {
     }
 })
 
-//  RECUPERATION DES ELEMENTS DU FORMULAIRE et envoi du formulaire
+
+
+//  RECUPERATION DES ELEMENTS DU FORMULAIRE
 
 const formElement = document.getElementById("add-form");
 formElement.addEventListener("submit", async function (event) {
@@ -121,15 +124,14 @@ formElement.addEventListener("submit", async function (event) {
         step = 1;
         stepUpdate(step);
         const img = document.querySelector('.image-sendbox label img');
-        img.remove();
+        img.src = "";
         formElement.reset();
         const editionDOM = document.querySelector(".js-container-gallery");
         editionDOM.innerHTML = "";
         const galleryDOM = document.querySelector(".gallery");
-        fetchWorks();
+        createProjectElementHtml();
         galleryDOM.innerHTML = "";
-        CreateProjectElementHtml();
-        
+        CreateProjectElementModale();
     }
 }
 )
@@ -153,10 +155,13 @@ document.getElementById('add-form').addEventListener('change', function () {
  document.getElementById('add-img').addEventListener('change', function (e) {
     console.log(this.files[0]);
     console.log(e.target.result);
-    document.querySelector('.image-sendbox label').innerHTML = `<img>`;
     const reader = new FileReader();
     reader.onload = function (e) {
      document.querySelector('.image-sendbox label img').src = e.target.result;
     }
     reader.readAsDataURL(this.files[0]);
 });
+
+
+
+

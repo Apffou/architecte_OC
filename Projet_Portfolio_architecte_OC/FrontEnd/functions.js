@@ -1,13 +1,17 @@
-//Fonction pour créer un projet dans la page html
-async function CreateProjectElementHtml () {
+async function fetchWorks(){
   const worksRespons = await fetch("http://localhost:5678/api/works");
   const projects = await worksRespons.json();
-  
+  return projects;
+}
+
+//Fonction pour créer un projet dans la page html
+async function createProjectElementHtml () {
+const projects = await fetchWorks();
+
   const galleryDOM = document.querySelector(".gallery");
   
   // Boucle sur tableau pour creer les elements Projets du site
   projects.forEach(element => {
-  
       const figureDOM = document.createElement("figure")
       const projectImage = document.createElement("img");
       const projectLegend = document.createElement("figcaption");
@@ -23,9 +27,31 @@ async function CreateProjectElementHtml () {
   });
 }
 
+// Fonction pour afficher la bonne étape dans la modale
+function stepUpdate(step) {
+  //Si on a un mauvais un numero d'étape, la fonction ne se lance pas. 
+  if (step < 1)
+      return;
+
+  const modalStep = document.querySelectorAll(".modal-step");
+  modalStep.forEach(element => {
+      element.style.display = "none";
+
+      const totot = element.dataset.step;
+      if (totot == step) {
+          element.style.display = "block";
+      }
+      if (step === 1) {
+          const arrow = document.querySelector(".arrow");
+          arrow.style.display = "none";
+      }
+  })
+}
+
+
 
 //Fonction pour Créer les projets dans la modale
-async function fetchWorks() {
+async function CreateProjectElementModale() {
   const worksRespons = await fetch("http://localhost:5678/api/works");
   const projects = await worksRespons.json();
   const editionDOM = document.querySelector(".js-container-gallery");
@@ -48,19 +74,20 @@ async function fetchWorks() {
       divDOM.appendChild(imageDOM);
       editionDOM.appendChild(divDOM)
   });
+    // Suppression d'un projet Modale Step 1 au clic 
+    const garbageDom = document.querySelectorAll(".trash-ico");
+    garbageDom.forEach(element => {
+        element.addEventListener('click', function () {
+            const id = element.dataset.projet;
+            deleteProject(id);
+        })
+    });
+  }
 
-  // Suppression d'un projet Modale Step 1 au clic 
-  const garbageDom = document.querySelectorAll(".trash-ico");
-  garbageDom.forEach(element => {
-      element.addEventListener('click', function () {
-          const id = element.dataset.projet;
-          deleteProject(id);
-      })
-  });
-}
-
-// Fonction pour supprimer les projets dans la modale
+  // Fonction pour supprimer les projets dans la modale
 async function deleteProject(id) {
+
+  const token = window.localStorage.getItem("token");
   const fetchDelete = await fetch("http://localhost:5678/api/works/" + id, {
       method: "DELETE",
       headers: { "Authorization": `Bearer ${token}` },
@@ -74,5 +101,3 @@ async function deleteProject(id) {
       removeElementProject.remove();
   }
 }
-
-

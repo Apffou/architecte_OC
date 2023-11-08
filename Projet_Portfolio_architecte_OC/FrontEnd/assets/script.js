@@ -1,5 +1,5 @@
 // Appel de la ressource 
-CreateProjectElementHtml();
+createProjectElementHtml();
 
 const categoryRespons = await fetch("http://localhost:5678/api/categories");
 const tagsCategory = await categoryRespons.json();
