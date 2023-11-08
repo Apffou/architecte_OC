@@ -1,4 +1,6 @@
 // Appel de la ressource 
+
+
 const worksRespons = await fetch("http://localhost:5678/api/works");
 const projects = await worksRespons.json();
 

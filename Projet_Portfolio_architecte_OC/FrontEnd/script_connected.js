@@ -1,3 +1,11 @@
+//import {fetchWorks} from './functions.js';
+async function fetchWorks() {
+    const worksRespons = await fetch("http://localhost:5678/api/works");
+    const queryResult = await worksRespons.json();
+    return queryResult;
+}
+
+
 let modal = null;
 let step = 0;
 
@@ -58,6 +66,7 @@ asideClose.addEventListener('click', function (e) {
     }
 })
 
+
 // Affichage des éléments HTML en mode édition
 
 const token = window.localStorage.getItem("token");
@@ -67,15 +76,15 @@ if (token) {
     domVisible.forEach(element => {
         element.style.visibility = "visible";
     })
-    document.getElementById('id-logout').innerHTML ="logout";
+
+    document.getElementById('id-logout').innerHTML = "logout";
     let modalTitle = document.querySelector(".modal-wrapper h1")
     modalTitle.innerText = "Galerie photo";
 
     // Appel de la ressource 
-    const worksRespons = await fetch("http://localhost:5678/api/works");
-    const projects = await worksRespons.json();
-    const editionDOM = document.querySelector(".js-container-gallery");
 
+    const editionDOM = document.querySelector(".js-container-gallery");
+    const projects = await fetchWorks();
     projects.forEach(element => {
         // Création des éléments HTML
         const divDOM = document.createElement("div");
@@ -99,7 +108,6 @@ if (token) {
 
 
 // Suppression d'un projet Modale Step 1 au clic 
-
 const garbageDom = document.querySelectorAll(".trash-ico");
 garbageDom.forEach(element => {
     element.addEventListener('click', function () {
@@ -107,7 +115,6 @@ garbageDom.forEach(element => {
         deleteProject(id);
     })
 });
-
 
 async function deleteProject(id) {
     const fetchDelete = await fetch("http://localhost:5678/api/works/" + id, {
@@ -140,7 +147,7 @@ btnModale.addEventListener('click', function () {
         const arrow = document.querySelector(".arrow");
         arrow.style.display = "block";
 
-        arrow.addEventListener('click', function(){
+        arrow.addEventListener('click', function () {
             step = 1;
             stepUpdate(step)
         })
@@ -156,32 +163,54 @@ formElement.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const formContent = {
-        image : "",
-        title : document.getElementById("Titre").value,
-        category : document.getElementById("Category-select").value,
+        image: "",
+        title: document.getElementById("Titre").value,
+        category: document.getElementById("Category-select").value,
     }
-
     var formData = new FormData(this);
 
     //Appel de la fonction dans le back end
     const callFetch = await fetch("http://localhost:5678/api/works", {
         method: "POST",
         body: formData,
-        headers: { "Authorization": `Bearer ${token}`,
-         }
+        headers: {
+            "Authorization": `Bearer ${token}`,
+        }
     });
     // une fois le projet envoyé , retour à la modale step 1
-    if(callFetch.status === 201) {
-        step = 1 ;
-        stepUpdate(step)
-        
+    if (callFetch.status === 201) {
+        step = 1;
+        stepUpdate(step);
+        formElement.reset()
+        const editionDOM = document.querySelector(".js-container-gallery");
+        editionDOM.innerHTML="";
+        const projects = await fetchWorks();
+        projects.forEach(element => {
+            // Création des éléments HTML
+            const divDOM = document.createElement("div");
+            const binDOM = document.createElement("i");
+            const imageDOM = document.createElement("img");
+            // Ajout des class sur ces éléments
+            divDOM.classList.add("js-content");
+            divDOM.dataset.projet = element.id;
+            binDOM.classList.add("fa-solid", "fa-trash-can", "trash-ico");
+            binDOM.dataset.projet = element.id;
+            imageDOM.classList.add("js-content-img")
+    
+            imageDOM.src = element.imageUrl;
+            imageDOM.alt = element.title;
+            // Indentation des éléments HTML
+            divDOM.appendChild(binDOM)
+            divDOM.appendChild(imageDOM);
+            editionDOM.appendChild(divDOM)
+        });
     }
 }
 )
 
 // Si tous les champs sont remplis alors le bouton devient vert et cliquable
 
-document.getElementById('add-form').addEventListener('change', function(){
+document.getElementById('add-form').addEventListener('change', function () {
     const checkValue = "#add-img, #Titre, #Category-select";
     const allFilled = checkValue.split(', ').every(selector => {
         console.log(selector);
@@ -189,20 +218,20 @@ document.getElementById('add-form').addEventListener('change', function(){
         return document.querySelector(selector).value;
     });
     if (allFilled) {
-         document.querySelector('#add-form [type="submit"]').removeAttribute('disabled');
+        document.querySelector('#add-form [type="submit"]').removeAttribute('disabled');
 
-    }else{
+    } else {
         document.querySelector('#add-form [type="submit"]').setAttribute('disabled', 'disabled');
     }
 });
 
 // affichage de l'image dans la console
-document.getElementById('add-img').addEventListener('change', function(e){
+document.getElementById('add-img').addEventListener('change', function (e) {
     console.log(this.files[0]);
     console.log(e.target.result);
     document.querySelector('.image-sendbox label').innerHTML = `<img>`;
     const reader = new FileReader();
-    reader.onload = function(e){
+    reader.onload = function (e) {
         document.querySelector('.image-sendbox label img').src = e.target.result;
     }
     reader.readAsDataURL(this.files[0]);
