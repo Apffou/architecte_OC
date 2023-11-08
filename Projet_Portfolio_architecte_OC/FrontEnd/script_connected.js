@@ -15,6 +15,10 @@ function stepUpdate(step) {
         if (totot == step) {
             element.style.display = "block";
         }
+        if (step === 1) {
+            const arrow = document.querySelector(".arrow");
+            arrow.style.display = "none";
+        }
     })
 }
 
@@ -28,10 +32,6 @@ const openModal = function (e) {
     modal.style.visibility = "visible";
     modal.removeAttribute('aria-hidden');
     modal.setAttribute('aria-modal', 'true');
-    if (step === 1) {
-        const arrow = document.querySelector(".arrow");
-        arrow.style.display = "none";
-    }
 
     // Click sur croix on ferme la modale
     modal.querySelector('.js-modal-close').addEventListener('click', closeModal);
@@ -98,8 +98,7 @@ if (token) {
 }
 
 
-// Suppression d'un projet Modale Step 1
-
+// Suppression d'un projet Modale Step 1 au clic 
 
 const garbageDom = document.querySelectorAll(".trash-ico");
 garbageDom.forEach(element => {
@@ -125,8 +124,6 @@ async function deleteProject(id) {
     }
 }
 
-
-
 //Ne pas oublier le message d'erreur si le formulaire n'est pas correctement rempli 
 //Afficher une reponse de l'api si le formulaire est correctement envoyé 
 
@@ -142,14 +139,17 @@ btnModale.addEventListener('click', function () {
     if (step === 2) {
         const arrow = document.querySelector(".arrow");
         arrow.style.display = "block";
-    }
-    else {
-        arrow.style.display = "none";
+
+        arrow.addEventListener('click', function(){
+            step = 1;
+            stepUpdate(step)
+        })
     }
 })
 
 
-//  !!!! RECUPERATION DES ELEMENTS DU FORMULAIRE
+
+//  RECUPERATION DES ELEMENTS DU FORMULAIRE
 
 const formElement = document.getElementById("add-form");
 formElement.addEventListener("submit", async function (event) {
@@ -163,10 +163,6 @@ formElement.addEventListener("submit", async function (event) {
 
     var formData = new FormData(this);
 
-    if(formContent.title = null , formContent.category = null){
-
-    }
-
     //Appel de la fonction dans le back end
     const callFetch = await fetch("http://localhost:5678/api/works", {
         method: "POST",
@@ -174,10 +170,16 @@ formElement.addEventListener("submit", async function (event) {
         headers: { "Authorization": `Bearer ${token}`,
          }
     });
+    // une fois le projet envoyé , retour à la modale step 1
+    if(callFetch.status === 201) {
+        step = 1 ;
+        stepUpdate(step)
+        
+    }
 }
 )
 
-// Si tous les champs sont remplis alors le bouton devient vert et cliquable. 
+// Si tous les champs sont remplis alors le bouton devient vert et cliquable
 
 document.getElementById('add-form').addEventListener('change', function(){
     const checkValue = "#add-img, #Titre, #Category-select";
@@ -187,7 +189,8 @@ document.getElementById('add-form').addEventListener('change', function(){
         return document.querySelector(selector).value;
     });
     if (allFilled) {
-        document.querySelector('#add-form [type="submit"]').removeAttribute('disabled');
+         document.querySelector('#add-form [type="submit"]').removeAttribute('disabled');
+
     }else{
         document.querySelector('#add-form [type="submit"]').setAttribute('disabled', 'disabled');
     }
