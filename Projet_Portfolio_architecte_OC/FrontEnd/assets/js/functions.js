@@ -27,6 +27,8 @@ const projects = await fetchWorks();
   });
 }
 
+let step = 0;
+
 // Fonction pour afficher la bonne étape dans la modale
 function stepUpdate(step) {
   //Si on a un mauvais un numero d'étape, la fonction ne se lance pas. 
@@ -47,8 +49,6 @@ function stepUpdate(step) {
       }
   })
 }
-
-
 
 //Fonction pour Créer les projets dans la modale
 async function CreateProjectElementModale() {

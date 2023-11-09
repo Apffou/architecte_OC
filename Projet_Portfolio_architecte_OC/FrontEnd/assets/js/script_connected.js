@@ -1,26 +1,4 @@
 let modal = null;
-let step = 0;
-
-// Fonction pour afficher la bonne étape dans la modale
-function stepUpdate(step) {
-    //Si on a un mauvais un numero d'étape, la fonction ne se lance pas. 
-    if (step < 1)
-        return;
-
-    const modalStep = document.querySelectorAll(".modal-step");
-    modalStep.forEach(element => {
-        element.style.display = "none";
-
-        const totot = element.dataset.step;
-        if (totot == step) {
-            element.style.display = "block";
-        }
-        if (step === 1) {
-            const arrow = document.querySelector(".arrow");
-            arrow.style.display = "none";
-        }
-    })
-}
 
 // Fonction qui permet d'afficher la boite modale
 const openModal = function (e) {
@@ -60,7 +38,6 @@ asideClose.addEventListener('click', function (e) {
 
 
 // Affichage des éléments HTML en mode édition
-
 const token = window.localStorage.getItem("token");
 if (token) {
     const domVisible = document.querySelectorAll(".visible");
@@ -71,10 +48,9 @@ if (token) {
     let modalTitle = document.querySelector(".modal-wrapper h1")
     modalTitle.innerText = "Galerie photo";
     document.getElementById('id-logout').innerHTML = "logout";
-    // Appel de la fonction qui créer mes projets supprimable 
+    // Appel de la fonction qui créer mes projets supprimable dans modal step 1
     CreateProjectElementModale();
 }
-
 
 
 const btnModale = document.querySelector(".btn_modale");
@@ -95,8 +71,6 @@ btnModale.addEventListener('click', function () {
         })
     }
 })
-
-
 
 //  RECUPERATION DES ELEMENTS DU FORMULAIRE
 
@@ -164,7 +138,3 @@ document.getElementById('add-form').addEventListener('change', function () {
     }
     reader.readAsDataURL(this.files[0]);
 });
-
-
-
-

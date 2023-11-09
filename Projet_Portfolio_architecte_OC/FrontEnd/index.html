@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
@@ -47,8 +48,13 @@
 						<form action="#" method="post" class="js-form" id="add-form">
 							<div class="image-sendbox">
 								<i class="fa-solid fa-mountain-sun fa-flip-horizontal fa-2xl"></i>
-								<label for="add-img"><span>+ Ajouter une photo</span><img></label>
-								<input id="add-img" type="file" name="image" accept=".png, .jpg">
+								<div>
+									<label for="add-img">
+										<span>+ Ajouter une photo</span>
+										<img>
+									</label>
+									<input id="add-img" type="file" name="image" accept=".png, .jpg">
+								</div>
 								<p>jpg, png : 4 mo</p>
 							</div>
 
@@ -61,7 +67,7 @@
 								<option value="2">Appartements</option>
 								<option value="3">Hotels & restaurants</option>
 							</select>
-						<div class="msg-error"></div>
+							<div class="msg-error"></div>
 							<div class="btn-modale-content">
 								<button type="submit" class="btn_modale" disabled>Valider</button>
 							</div>
@@ -74,7 +80,6 @@
 	</aside>
 	<main>
 		<header>
-
 			<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 			<nav>
 				<ul>
@@ -119,7 +124,7 @@
 				<label for="message">Message</label>
 				<textarea name="message" id="message" cols="30" rows="10"></textarea>
 				<input type="submit" value="Envoyer">
-			</form> 
+			</form>
 		</section>
 	</main>
 
