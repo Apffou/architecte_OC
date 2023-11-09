@@ -323,3 +323,9 @@ h2 .modale {
     cursor: pointer;
 }
 
+.msg-error{
+    color: red;
+    font-size: large;
+    font-family: 'Syne';
+    text-align: center;
+}

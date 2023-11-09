@@ -133,6 +133,10 @@ formElement.addEventListener("submit", async function (event) {
         galleryDOM.innerHTML = "";
         CreateProjectElementModale();
     }
+    else {
+        const msgError = document.querySelector(".msg-error");
+        msgError.innerHTML = "L'envoi du formulaire à échoué."
+    }
 }
 )
 
@@ -145,7 +149,6 @@ document.getElementById('add-form').addEventListener('change', function () {
     });
     if (allFilled) {
         document.querySelector('#add-form [type="submit"]').removeAttribute('disabled');
-
     } else {
         document.querySelector('#add-form [type="submit"]').setAttribute('disabled', 'disabled');
     }
