@@ -28,12 +28,12 @@
     padding-right: 10px;
 }
 
-.modale a {
+.modal-link a {
     text-decoration: none;
     color: black;
 }
 
-h2 .modale {
+h2 .modal-link {
     font-size: 14px;
     font-family: 'Work sans';
     font-weight: 500;
@@ -89,7 +89,7 @@ h2 .modale {
 
 }
 
-.modale {
+.modal-link {
     padding-left: 5px;
 }
 
