@@ -40,14 +40,17 @@ asideClose.addEventListener('click', function (e) {
 // Affichage des éléments HTML en mode édition
 const token = window.localStorage.getItem("token");
 if (token) {
-    const domVisible = document.querySelectorAll(".visible");
+    // ajout
+    const userLogsDOM = document.querySelectorAll(".user-logged-element");
+    userLogsDOM.forEach(element => {
+        element.classList.remove("hidden");
 
-    domVisible.forEach(element => {
-        element.style.visibility = "visible";
     })
-    let modalTitle = document.querySelector(".modal-wrapper h1")
+    let modalTitle = document.querySelector(".modal-wrapper h2")
     modalTitle.innerText = "Galerie photo";
-    document.getElementById('id-logout').innerHTML = "logout";
+    document.getElementById('id-login').style.display = "none";
+    //Appel de la fonction pour
+    logOut();
     // Appel de la fonction qui créer mes projets supprimable dans modal step 1
     CreateProjectElementModale();
 }
@@ -58,7 +61,7 @@ const modalWrapper = document.querySelector(".modal-wrapper");
 btnModale.addEventListener('click', function () {
     step = 2;
     stepUpdate(step);
-    let modalTitle = document.querySelector(".title-modal-2 h1")
+    let modalTitle = document.querySelector(".title-modal-2 h2")
     modalTitle.innerHTML = "Ajout photo";
     // Affichage de la flèche quand on est sur modale step 2 
     if (step === 2) {

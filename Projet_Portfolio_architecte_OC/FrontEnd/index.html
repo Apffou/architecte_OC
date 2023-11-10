@@ -11,7 +11,7 @@
 		rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<link rel="stylesheet" href="style_edition.css">
+	<link rel="stylesheet" href="./assets/style_edition.css">
 	<script src="https://kit.fontawesome.com/8f6be8aeb3.js" crossorigin="anonymous"></script>
 	<script src="./assets/js/functions.js"></script>
 	<script type="module" src="assets/js/script.js"></script>
@@ -19,7 +19,7 @@
 </head>
 
 <body>
-	<span class="edition visible">Mode édition</span>
+	<span class="edition user-logged-element hidden">Mode édition</span>
 	<aside id="wrapper-modal" class="modal" aria-hidden="true">
 		<div class="modal-wrapper js-modal-stop">
 			<div class="header">
@@ -33,17 +33,17 @@
 			</div>
 			<div class="modal-content">
 				<div class="modal-step" data-step="1">
-					<h1>Galerie photo</h1>
+					<h2>Galerie photo</h2>
 					<div class="js-container-gallery">
 					</div>
 					<div class="btn-modale-content">
-						<button class="btn_modale" type="submit" value="Ajouter une photo" class="">
+						<button class="btn_modale" type="submit" value="Ajouter une photo">
 							Ajouter une photo
 						</button>
 					</div>
 				</div>
 				<div class="modal-step title-modal-2" data-step="2">
-					<h1></h1>
+					<h2></h2>
 					<div class="form-wrapper">
 						<form action="#" method="post" class="js-form" id="add-form">
 							<div class="image-sendbox">
@@ -53,7 +53,7 @@
 										<span>+ Ajouter une photo</span>
 										<img>
 									</label>
-									<input id="add-img" type="file" name="image" accept=".png, .jpg">
+									<input id="add-img" type="file" name="image" accept=".png,.jpg">
 								</div>
 								<p>jpg, png : 4 mo</p>
 							</div>
@@ -71,7 +71,6 @@
 							<div class="btn-modale-content">
 								<button type="submit" class="btn_modale" disabled>Valider</button>
 							</div>
-
 						</form>
 					</div>
 				</div>
@@ -85,7 +84,8 @@
 				<ul>
 					<li>projets</li>
 					<li>contact</li>
-					<li id="id-logout"><a href="login.html">login</a></li>
+					<li id="id-login"><a href="login.html">login</a></li>
+					<li id="id-logout"><a href="#">logout</a></li>
 					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 				</ul>
 			</nav>
@@ -93,7 +93,7 @@
 
 		<section id="introduction">
 			<figure>
-				<img src="./assets/images/sophie-bluel.png" alt="">
+				<img src="./assets/images/sophie-bluel.png" alt="#">
 			</figure>
 			<article>
 				<h2>Designer d'espace</h2>
@@ -107,7 +107,7 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets <span class="modale visible"><a href="#wrapper-modal" class="js-modal">modifier</a></span>
+			<h2>Mes Projets <span class="modale user-logged-element hidden"><a href="#wrapper-modal" class="js-modal">modifier</a></span>
 			</h2>
 			<div class="filters"></div>
 			<div class="gallery">

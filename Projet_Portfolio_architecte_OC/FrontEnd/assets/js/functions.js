@@ -39,8 +39,8 @@ function stepUpdate(step) {
   modalStep.forEach(element => {
       element.style.display = "none";
 
-      const totot = element.dataset.step;
-      if (totot == step) {
+      const modalStep = element.dataset.step;
+      if (modalStep == step) {
           element.style.display = "block";
       }
       if (step === 1) {
@@ -100,4 +100,13 @@ async function deleteProject(id) {
       removeElementModal.remove();
       removeElementProject.remove();
   }
+}
+
+function logOut () {
+  const logOutDOM = document.getElementById('id-logout');
+  logOutDOM.style.display = "block"
+  logOutDOM.addEventListener ('click', function() {
+    document.location.href = "index.html";
+    window.localStorage.removeItem("token")
+  })
 }

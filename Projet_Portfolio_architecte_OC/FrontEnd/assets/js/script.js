@@ -33,8 +33,8 @@ elementFilterALL.forEach(elementfilter => {
         //let filtreID = event.target.getAttribute("data-id");
         let filtreID = event.target.dataset.id;
 
-        //const toti = document.querySelectorAll(".tag.tag_selected");
-        //toti.forEach(element => {
+        //const tagSelected = document.querySelectorAll(".tag.tag_selected");
+        //tagSelected.forEach(element => {
         //     element.classList.remove("tag_selected");
         // })
 
