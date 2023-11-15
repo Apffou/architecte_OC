@@ -1,48 +1,49 @@
 @font-face {
     font-family: 'Font awesome solid';
-    src: url(./assets/fontawesome/fa-solid-900.ttf);
+    src: url(../fontawesome/fa-solid-900.woff2) format('woff2');
 }
 
 @font-face {
     font-family: 'Font-regular';
-    src: url(./assets/fontawesome/fa-regular-400.woff2) format('woff2');
+    src: url(../fontawesome/fa-regular-400.woff2) format('woff2');
 }
 
-/* Edition mode actif */
+/* Mode édition*/
 .edition {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 2em;
+    height: 3em;
     background-color: black;
     color: white;
     font: inherit;
     text-align: center;
-    visibility: hidden;
+    font-family: 'Work sans';
 }
 
-.modale a {
+.edition::before {
+    font-family: 'Font-regular';
+    content: '\f044';
+    padding-right: 10px;
+}
+
+.modal-link a {
     text-decoration: none;
     color: black;
-}
-
-h2 .modale {
     font-size: 14px;
     font-family: 'Work sans';
     font-weight: 500;
-    text-decoration: none;
 }
 
 .js-modal::before {
     font-family: 'Font-regular';
     content: '\f044';
     padding-right: 10px;
-
 }
 
-.visible {
-    font-family: 'Work sans';
+.hidden{
+    display: none;
 }
 
 /* Style modal step 1  */
@@ -71,19 +72,18 @@ h2 .modale {
     border-radius: 15px;
 }
 
-.modal-wrapper h1 {
+.modal-wrapper h2 {
     color: black;
-    font-family: 'Work sans';
+    font-family: 'Work Sans';
     text-align: center;
     margin: 40px 0px 45px 0px;
-
+    font-weight: 400;
+    font-size: 26px;
 }
 
-.modale {
+.modal-link {
     padding-left: 5px;
-    visibility: hidden;
 }
-
 
 .js-modal-close {
     position: absolute;
@@ -103,10 +103,9 @@ h2 .modale {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-    gap: 15px 5px;
+    gap: 25px 6px;
     width: 100%;
     padding-bottom: 60px;
-
 }
 
 .js-content {
@@ -117,25 +116,27 @@ h2 .modale {
 
 .js-content-img {
     width: 100%;
-    height: 100%;
     object-fit: cover;
+    aspect-ratio: 48/64;
 }
 
-.trash-ico {
+.js-content .trash-ico {
     position: absolute;
     background-color: black;
-    width: 17px;
-    height: 17px;
+    width: 18px;
+    height: 18px;
     color: #FFF;
     top: 5px;
     right: 5px;
-    padding: 2px;
+    padding: 3px;
     cursor: pointer;
     display: grid;
     place-items: center;
+    font-weight: 500;
+    border-radius: 2px;
 }
 
-.btn-modale-content{
+.btn-modale-content {
     display: flex;
     justify-content: center;
     border-top: 1.5px solid #B3B3B3;
@@ -157,21 +158,21 @@ h2 .modale {
     cursor: pointer;
 }
 
-.btn_modale:disabled{
-    background-color: #A7A7A7;
-    cursor:crosshair;
-}
-
-
 /* Modale Ajouter une photo */
 
-.arrow{
+.btn_modale:disabled {
+    background-color: #A7A7A7;
+    cursor: not-allowed;
+}
+
+.arrow {
     display: none;
     background: white;
     border: none;
     position: absolute;
     top: 20px;
     left: 25px;
+    cursor: pointer;
 }
 
 .js-add-content-block {
@@ -181,7 +182,6 @@ h2 .modale {
     width: 100%;
     padding-bottom: 60px;
     border-bottom: 1.5px solid black;
-
 }
 
 .js-add-content {
@@ -198,8 +198,6 @@ h2 .modale {
 .js-add-content p {
     color: black;
 }
-
-
 
 .js-button-add {
     background-color: #B9C5CC;
@@ -230,10 +228,6 @@ h2 .modale {
     margin-bottom: 40px;
 }
 
-.btn-add-content {
-    margin: 2em auto;
-}
-
 .btn-add-content button {
     font-family: 'Syne';
     font-weight: 700;
@@ -249,6 +243,12 @@ h2 .modale {
 }
 
 /* Modale Step 2   */
+
+.js-form {
+    display: flex;
+    flex-direction: column;
+}
+
 .image-sendbox {
     display: flex;
     flex-direction: column;
@@ -263,35 +263,34 @@ h2 .modale {
 .image-sendbox label img {
     height: 199px;
     position: absolute;
-    top: 138px;
+    top: 142px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .image-sendbox i {
-        color: #B9C5CC;
-        font-size: 3em;
-        line-height: 0;
-        padding-bottom: 25px;
-    
+    color: #B9C5CC;
+    font-size: 3em;
+    line-height: 0;
+    padding-bottom: 25px;
 }
 
 .form-wrapper .image-sendbox input {
     opacity: 0;
     position: absolute;
-    z-index: 0;
     display: block;
     cursor: pointer;
-    width: auto;
 }
 
 .form-wrapper label {
-    margin:  1em 0 1em 0;
+    margin: 1em 0 1em 0;
 }
 
-.image-sendbox label{
+.image-sendbox label {
     width: 100%;
 }
 
-.image-sendbox label span{
+.image-sendbox label span {
     font-family: 'Work Sans';
     color: #6189A0;
     font-weight: 500;
@@ -300,19 +299,14 @@ h2 .modale {
     height: 40px;
     border-radius: 60px;
     background-color: #CBD6DC;
-    width: 12vw;
+    min-width: 12vw;
     display: grid;
     place-items: center;
 }
 
-.js-form{
-    display: flex;
-    flex-direction: column;
-}
+/* Message d'erreur si le formulaire ne s'est pas bien envoyé */
 
-/* Message d'erreur si el formulaire ne s'est pas bien envoyé */
-
-.msg-error{
+.msg-error {
     color: red;
     font-size: large;
     font-family: 'Syne';
