@@ -15,6 +15,7 @@ const projects = await fetchWorks();
       const figureDOM = document.createElement("figure")
       const projectImage = document.createElement("img");
       const projectLegend = document.createElement("figcaption");
+      //Element pour permettre de filtrer les projets
       figureDOM.dataset.categoryId =  element.categoryId;
       figureDOM.dataset.projet = element.id;
       projectImage.src = element.imageUrl;
