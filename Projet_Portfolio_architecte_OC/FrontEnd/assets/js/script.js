@@ -28,13 +28,7 @@ tagsCategory.forEach(element => {
 const elementFilterALL = document.querySelectorAll(".filters span");
 elementFilterALL.forEach(elementfilter => {
     elementfilter.addEventListener("click", function (event) {
-        //let filtreID = event.target.getAttribute("data-id");
         let filtreID = event.target.dataset.id;
-
-        //const tagSelected = document.querySelectorAll(".tag.tag_selected");
-        //tagSelected.forEach(element => {
-        //     element.classList.remove("tag_selected");
-        // })
 
         document.querySelector(".tag_selected").classList.remove("tag_selected");
 
