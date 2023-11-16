@@ -3,9 +3,10 @@ let modal = null;
 // Fonction qui permet d'afficher la boite modale
 const openModal = function (e) {
     e.preventDefault();
+    //Fonction pour afficher la bonne étape dans la modale
     step = 1;
     stepUpdate(step);
-    // On recupère la modale
+    // On recupère la modale en ciblant l'attribut href
     const modal = document.querySelector(e.target.getAttribute('href'));
     modal.style.visibility = "visible";
     modal.removeAttribute('aria-hidden');
@@ -36,26 +37,25 @@ asideClose.addEventListener('click', function (e) {
     }
 })
 
-
-// Affichage des éléments HTML en mode édition
+// Affichage des éléments HTML en mode édition si connecté
+// Recuperation du token
 const token = window.localStorage.getItem("token");
+//Si on a le token alors on enlève la class hidden pour faire apparaitre les éléments
 if (token) {
-    // ajout
     const userLogsDOM = document.querySelectorAll(".user-logged-element");
     userLogsDOM.forEach(element => {
         element.classList.remove("hidden");
-
     })
     let modalTitle = document.querySelector(".modal-wrapper h2")
     modalTitle.innerText = "Galerie photo";
     document.getElementById('id-login').style.display = "none";
-    //Appel de la fonction pour
+    //Appel de la fonction pour se deconnecter
     logOut();
     // Appel de la fonction qui créer mes projets supprimable dans modal step 1
     CreateProjectElementModale();
 }
 
-
+//Affichage de la modale step 2 "ajout de projet"
 const btnModale = document.querySelector(".btn_modale");
 const modalWrapper = document.querySelector(".modal-wrapper");
 btnModale.addEventListener('click', function () {
@@ -75,18 +75,12 @@ btnModale.addEventListener('click', function () {
     }
 })
 
-//  RECUPERATION DES ELEMENTS DU FORMULAIRE
-
+//  Récuperation des éléments du formulaire
 const formElement = document.getElementById("add-form");
 formElement.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    const formContent = {
-        image: "",
-        title: document.getElementById("Titre").value,
-        category: document.getElementById("Category-select").value,
-    }
-    var formData = new FormData(this);
+    const formData = new FormData(this);
 
     //Appel de la fonction dans le back end
     const callFetch = await fetch("http://localhost:5678/api/works", {
@@ -118,7 +112,6 @@ formElement.addEventListener("submit", async function (event) {
 )
 
 // Si tous les champs sont remplis alors le bouton devient vert et cliquable
-
 document.getElementById('add-form').addEventListener('change', function () {
     const checkValue = "#add-img, #Titre, #Category-select";
     const allFilled = checkValue.split(', ').every(selector => {

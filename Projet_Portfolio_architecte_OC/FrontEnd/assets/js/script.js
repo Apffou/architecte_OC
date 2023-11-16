@@ -22,10 +22,10 @@ tagsCategory.forEach(element => {
     elementFilter.innerText = element.name;
     elementFilter.dataset.id = element.id;
     parentFilters.appendChild(elementFilter);
-
 })
-
+// recuperation de tous les filtres/span html
 const elementFilterALL = document.querySelectorAll(".filters span");
+//Boucle sur tous mes span + écoute au click
 elementFilterALL.forEach(elementfilter => {
     elementfilter.addEventListener("click", function (event) {
         let filtreID = event.target.dataset.id;

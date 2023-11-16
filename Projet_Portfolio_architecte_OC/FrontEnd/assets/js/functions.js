@@ -29,7 +29,6 @@ const projects = await fetchWorks();
 }
 
 let step = 0;
-
 // Fonction pour afficher la bonne étape dans la modale
 function stepUpdate(step) {
   //Si on a un mauvais un numero d'étape, la fonction ne se lance pas. 
@@ -44,6 +43,7 @@ function stepUpdate(step) {
       if (modalStep == step) {
           element.style.display = "block";
       }
+      //Si on est sur la step 1 alors n'affiche pas la flèche
       if (step === 1) {
           const arrow = document.querySelector(".arrow");
           arrow.style.display = "none";
@@ -51,7 +51,7 @@ function stepUpdate(step) {
   })
 }
 
-//Fonction pour Créer les projets dans la modale
+//Fonction pour Créer les projets dans la modale step 1
 async function CreateProjectElementModale() {
   const worksRespons = await fetch("http://localhost:5678/api/works");
   const projects = await worksRespons.json();
@@ -66,8 +66,7 @@ async function CreateProjectElementModale() {
       divDOM.dataset.projet = element.id;
       binDOM.classList.add("fa-solid", "fa-trash-can", "trash-ico");
       binDOM.dataset.projet = element.id;
-      imageDOM.classList.add("js-content-img")
-
+      imageDOM.classList.add("js-content-img");
       imageDOM.src = element.imageUrl;
       imageDOM.alt = element.title;
       // Indentation des éléments HTML
@@ -94,7 +93,7 @@ async function deleteProject(id) {
       headers: { "Authorization": `Bearer ${token}` },
 
   });
-
+// Si bon staut alors on supprime le projet dans la modale et dans la page
   if (fetchDelete.status === 204) {
       const removeElementModal = document.querySelector(`div[data-projet='${id}']`);
       const removeElementProject = document.querySelector(`figure[data-projet='${id}']`);
@@ -103,6 +102,7 @@ async function deleteProject(id) {
   }
 }
 
+//Deconnection du mode administrateur
 function logOut () {
   const logOutDOM = document.getElementById('id-logout');
   logOutDOM.style.display = "block"

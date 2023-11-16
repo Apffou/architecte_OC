@@ -4,12 +4,12 @@ const connectingForm = document.querySelector(".connecting_form");
 connectingForm.addEventListener("submit", async function (event) {
     // Désactivation du comportement par défaut du navigateur
     event.preventDefault();
-
+    //Creation d'un objet pour recuperer les valeurs des champs du formulaire
     const interfaceLogin = {
         email: event.target.querySelector("[name=email]").value,
         password: event.target.querySelector("[name=password]").value,
     };
-    // création d'une const qui recupere les paramtres au bon format
+    // création d'une const qui recupere les paramètres et les convertit au bon format
     const settingsLogin = JSON.stringify(interfaceLogin);
 
     // Appel de la fonction fetch pour recuperer les identifiants
@@ -21,7 +21,7 @@ connectingForm.addEventListener("submit", async function (event) {
     });
 
     const loginRespons = await userIdentifiants.json();
-    //condition si j'ai le token alors tu stockes la donné et tu me rediriges
+    //condition si j'ai le token alors tu stockes la donnée et tu me rediriges vers la page d'accueil
     if (loginRespons.token) {
         window.localStorage.setItem("token", loginRespons.token);
         document.location.href = "index.html";
